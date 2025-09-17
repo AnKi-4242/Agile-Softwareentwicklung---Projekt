@@ -42,7 +42,7 @@ public class Termin {
 
     public Patient getPatient() throws SQLException {
         PatientDB patientDb = new PatientDB();
-        patient = patientDb.searchPatientFromId(patientId);
+        patient = patientDb.searchPatientById(patientId);
         return patient;
     }
 
@@ -70,7 +70,7 @@ public class Termin {
     public String toString() {
         try {
             if (patient == null) {
-                patient = patientDb.searchPatientFromId(patientId);
+                patient = patientDb.searchPatientById(patientId);
             }
             return "Termin {" + "Termin-ID: " + terminId + ", Patient: '" + patient.getNachname() + ", " + patient.getVorname()
                     + '\'' + ", wann: '" + getDatumZeit() +
