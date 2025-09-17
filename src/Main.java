@@ -25,7 +25,7 @@ public class Main {
 
             System.out.println("Alle Termine: ");
             for (Termin t : teV.zeigeAlleTermine()) {
-                Patient pat = patientDb.searchPatientFromId(t.getPatientId());
+                Patient pat = patientDb.searchPatientById(t.getPatientId());
                 if (pat != null) {
                     System.out.println("Termin für " + pat.getNachname() + ", " + pat.getVorname() + ", am "
                             + t.getDatumZeit() + " wegen: " + t.getGrund());
