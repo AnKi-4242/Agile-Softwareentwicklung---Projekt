@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class DatenbankPraxis {
     public static Connection connection() throws SQLException {
-        String url = "jdbc:sqlite:D:/dbpraxis.db";
+        String url = "jdbc:sqlite:data/dbpraxis.db";
         return DriverManager.getConnection(url);
     }
 }

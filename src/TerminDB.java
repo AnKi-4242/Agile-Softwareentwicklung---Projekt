@@ -31,7 +31,7 @@ public class TerminDB {
              ResultSet rs = sts.executeQuery(sql)) {
             while (rs.next()) {
                 Termin t = new Termin(
-                        rs.getInt("terminId"),
+                        rs.getInt("termin_id"),
                         rs.getInt("patient_id"),
                         rs.getString("datum_zeit"),
                         rs.getString("grund")
@@ -67,13 +67,13 @@ public class TerminDB {
         String sql = "SELECT * FROM termin WHERE datum_zeit = ?";
         try (Connection conn = DatenbankPraxis.connection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setString(3, "datumZeit");
+            pst.setString(1, datumZeit);
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
                     return new Termin(
-                            rs.getInt("terminId"),
-                            rs.getInt("patientId"),
-                            rs.getString("datumZeit"),
+                            rs.getInt("termin_id"),
+                            rs.getInt("patient_id"),
+                            rs.getString("datum_zeit"),
                             rs.getString("grund")
                     );
                 } else {
@@ -84,13 +84,13 @@ public class TerminDB {
     }
 
     public boolean editAppointment(Termin termin) throws SQLException {
-        String sql = "UPDATE termin SET termin_id = ?, patient_id = ?, datum_zeit = ?, grund = ?";
+        String sql = "UPDATE termin SET patient_id = ?, datum_zeit = ?, grund = ? WHERE termin_id = ?";
         try (Connection conn = DatenbankPraxis.connection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setInt(1, termin.getTerminId());
-            pst.setInt(2, termin.getPatientId());
-            pst.setString(3, termin.getDatumZeit());
-            pst.setString(4, termin.getGrund());
+            pst.setInt(1, termin.getPatientId());
+            pst.setString(2, termin.getDatumZeit());
+            pst.setString(3, termin.getGrund());
+            pst.setInt(4, termin.getTerminId());
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
         }

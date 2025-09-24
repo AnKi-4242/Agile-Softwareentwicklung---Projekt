@@ -34,30 +34,39 @@ public class PatientVerwaltung {
         return patientenListe;
     }
 
+    public List<Patient> holePatientenListe() {
+        try {
+            return patientDb.getAllPatients();
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Laden der Patienten: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
     public Patient suchePatientNachId(int patientId) {
         try {
             Patient patient = patientDb.searchPatientById(patientId);
-            if (patient == null) {
-                System.out.println("Kein Patient mit dieser ID gefunden");//hier lassen? Oder in GUI?
+            if (patient != null) {
+                return patient;
+            } else {
+                System.out.println("Kein Patient mit dieser ID gefunden");
             }
-            return patient;
         } catch (SQLException e) {
             System.out.println("Fehler bei Suche nach Patient: " + e.getMessage());
-            return null;
-        }
+        } return null;
     }
 
     public Patient suchePatientNachNamen(String nachname) {
         try {
             Patient patient = patientDb.searchPatientByLastname(nachname);
-            if (patient == null) {
+            if (patient != null) {
+                return patient;
+            } else {
                 System.out.println("Kein Patient unter diesem Nachnamen gefunden");
             }
-            return patient;
         } catch (SQLException e) {
             System.out.println("Fehler bei Suche nach Patient: " + e.getMessage());
-            return null;
-        }
+        } return null;
     }
 
     public boolean bearbeitePatient(Patient geaenderterPatient) {
@@ -74,7 +83,7 @@ public class PatientVerwaltung {
             Patient p = patientDb.searchPatientById(patientId);
             if (p != null) {
                 patientDb.deletePatient(patientId);
-                patientenListe.remove(p);
+                patientenListe.removeIf(existing -> existing.getPatientId() == patientId);
                 return true;
             } else {
                 System.out.println("Kein Patient gefunden");

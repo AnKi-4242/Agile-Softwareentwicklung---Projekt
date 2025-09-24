@@ -82,7 +82,7 @@ public class PatientDB {
         String sql = "SELECT * FROM patient WHERE nachname = ?";
         try (Connection conn = DatenbankPraxis.connection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setString(2, "nachname");
+            pst.setString(1, nachname);
 
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
@@ -104,16 +104,16 @@ public class PatientDB {
 
     //Methode editPatient()
     public boolean editPatient(Patient patient) throws SQLException {
-        String sql = "UPDATE patient SET patient_id = ?, nachname = ?, vorname = ?, geburtsdatum = ?, adresse = ?, kontakt = ?, kv = ?";
+        String sql = "UPDATE patient SET nachname = ?, vorname = ?, geburtsdatum = ?, adresse = ?, kontakt = ?, kv = ? WHERE patient_id = ?";
         try (Connection conn = DatenbankPraxis.connection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setInt(1, patient.getPatientId());
-            pst.setString(2, patient.getNachname());
-            pst.setString(3, patient.getVorname());
-            pst.setString(4, patient.getGeburtsDatum());
-            pst.setString(5, patient.getAdresse());
-            pst.setString(6, patient.getTelefonEmail());
-            pst.setString(7, patient.getKrankenkasse());
+            pst.setString(1, patient.getNachname());
+            pst.setString(2, patient.getVorname());
+            pst.setString(3, patient.getGeburtsDatum());
+            pst.setString(4, patient.getAdresse());
+            pst.setString(5, patient.getTelefonEmail());
+            pst.setString(6, patient.getKrankenkasse());
+            pst.setInt(7, patient.getPatientId());
 
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
