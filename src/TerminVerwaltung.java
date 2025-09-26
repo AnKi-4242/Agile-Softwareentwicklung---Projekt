@@ -103,4 +103,4 @@ public class TerminVerwaltung {
         }
         return false;
     }
-} //Habe zeigeAlleTermine auskommentiert, mal sehen obs ohne klappt
+}
