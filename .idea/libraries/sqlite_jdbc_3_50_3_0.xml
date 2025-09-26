@@ -2,6 +2,10 @@
   <library name="sqlite-jdbc-3.50.3.0">
     <CLASSES>
       <root url="jar://D:/Program Files (x86)/sqlite-jdbc-3.50.3.0.jar!/" />
+      <root url="jar://D:/Frau Fux ihr Zeuch/Projekte/PraxisAdv/junit-jupiter-api-5.10.0.jar!/" />
+      <root url="jar://D:/Frau Fux ihr Zeuch/Projekte/PraxisAdv/junit-jupiter-engine-5.10.0.jar!/" />
+      <root url="jar://D:/Frau Fux ihr Zeuch/Projekte/PraxisAdv/junit-platform-console-standalone-1.10.0.jar!/" />
+      <root url="jar://D:/Frau Fux ihr Zeuch/Projekte/PraxisAdv/junit-platform-launcher-1.10.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
